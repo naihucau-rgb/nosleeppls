@@ -17,8 +17,8 @@ if __name__ == "__main__":
     thread_1 = Thread1_DataCollection(data_queue=q, camera_index=CAMERA_INDEX)
     thread_1.start()
     
-    print(f"🔄 Đang kết nối tới Camera/OBS ở index: {CAMERA_INDEX}...")
-    print("⏳ Đang đợi tín hiệu hình ảnh (Tối đa 6 giây)...")
+    print(f" Đang kết nối tới Camera/OBS ở index: {CAMERA_INDEX}...")
+    print(" Đang đợi tín hiệu hình ảnh (Tối đa 6 giây)...")
     
     window_name = "Test Luong 1 - Visual Debugging"
     
@@ -32,10 +32,10 @@ if __name__ == "__main__":
             # Chứng tỏ hệ thống nhận diện được Driver nhưng bạn đang TẮT Virtual Camera trên OBS
             if not has_received_frame and (time.time() - start_time > 6.0):
                 print("\n" + "="*60)
-                print("❌ LỖI KHÔNG NHẬN ĐƯỢC HÌNH ẢNH!")
-                print(f"👉 Nguyên nhân: Máy tính nhận được thiết bị số {CAMERA_INDEX} nhưng không có hình.")
-                print("   Chắc chắn bạn chưa bấm nút 'Start Virtual Camera' trên phần mềm OBS!")
-                print("👉 Khắc phục: Hãy bật Virtual Camera trên OBS lên rồi chạy lại file test này nhé.")
+                print(" LỖI KHÔNG NHẬN ĐƯỢC HÌNH ẢNH.")
+                print(f" Nguyên nhân: Máy tính nhận được thiết bị số {CAMERA_INDEX} nhưng không có hình.")
+                print("   Kiểm tra xem bạn đã bấm nút 'Start Virtual Camera' trên phần mềm OBS chưa.")
+                print(" Khắc phục: Hãy bật Virtual Camera trên OBS lên rồi chạy lại file test này.")
                 print("="*60 + "\n")
                 break # Chủ động thoát chương trình một cách an toàn
                 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
             # Liên tục lấy dữ liệu từ Queue
             if not q.empty():
                 if not has_received_frame:
-                    print("🎉 Kết nối thành công! Đang hiển thị camera...")
+                    print(" Kết nối thành công. Đang hiển thị camera...")
                     has_received_frame = True # Xác nhận đã thông luồng hình ảnh thành công
                 
                 data = q.get()
@@ -97,10 +97,10 @@ if __name__ == "__main__":
             time.sleep(0.001) # Khóa nhẹ vòng lặp để bảo vệ CPU không bị quá tải 100%
                     
     except KeyboardInterrupt:
-        print("Đã nhận lệnh ngắt từ bàn phím...")
+        print("Đã nhận lệnh ngắt...")
     finally:
-        print("Đang dừng hệ thống...")
+        print("Đang dừng...")
         thread_1.stop()
         thread_1.join()
         cv2.destroyAllWindows()
-        print("Tắt thành công!")
+        print("Đã tắt.")
